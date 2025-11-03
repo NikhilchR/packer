@@ -21,10 +21,10 @@ jobs:
           version: latest
 
       - name: Initialize Packer
-        run: packer init aws-ubuntu.pkr.hcl
+        run: packer init templates/aws-ubuntu.pkr.hcl
 
       - name: Validate Packer template
-        run: packer validate aws-ubuntu.pkr.hcl
+        run: packer validate templates/aws-ubuntu.pkr.hcl
 
       - name: Build AMI
-        run: packer build aws-ubuntu.pkr.hcl
+        run: packer build templates/aws-ubuntu.pkr.hcl
