@@ -4,12 +4,13 @@ provider "aws" {
 
 data "aws_ami" "ubuntu" {
   most_recent = true
-  owners      = ["099720109477"]
+  owners      = ["self"]
 
   filter {
-  name   = "Packer Build Instance"
-  values = ["my-packer-ami"]
-}
+    name   = "name"
+    values = ["my-packer-ami"]
+  }
+
   filter {
     name   = "virtualization-type"
     values = ["hvm"]
