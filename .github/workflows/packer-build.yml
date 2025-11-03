@@ -29,6 +29,11 @@ jobs:
       - name: Build AMI
         run: packer build templates/aws-ubuntu.pkr.hcl
 
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: latest  
+
       - name: Validate and provision infrastructure using terraform
         run: |
           cd tf_modules
