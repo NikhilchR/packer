@@ -40,4 +40,8 @@ build {
  sources = [
 		"source.amazon-ebs.ubuntu"
 	]
+  provisioner "ansible" {
+    playbook_file = "provisioner/setup.yaml"
+    user = "ec2_user"    
+  }
 }
