@@ -1,4 +1,4 @@
-name: Build AMI with Packer with Ansible
+name: Build AMI and create EC2 instance with Golden AMI
 on:
  push:
    branches:
@@ -28,3 +28,11 @@ jobs:
 
       - name: Build AMI
         run: packer build templates/aws-ubuntu.pkr.hcl
+
+      - name: Validate and provision infrastructure using terraform
+        run: |
+          cd tf_modules
+          terraform init
+          terraform validate
+          terraform apply -auto-approve
+
