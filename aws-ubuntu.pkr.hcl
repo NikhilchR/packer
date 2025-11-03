@@ -1,16 +1,27 @@
 packer {
   required_plugins {
     amazon = {
+      version = ">= 1.2.8"
       source  = "github.com/hashicorp/amazon"
-      version = "~> 1"
     }
   }
 }
 
+variable "region" {
+  type = string
+  default = "us-east-1"
+}
+
+variable "type_instance" {
+  type = string
+  default = "t2.micro"
+}
+
 source "amazon-ebs" "ubuntu"{
  ami_name = "my-packer-ami"
- instance_type = "t2.micro"
- region = "us-east-1"
+ ami_description = "Custom ubuntu AMI"
+ instance_type = var.type_instance
+ region = var.region
  source_ami_filter {
    filters = {
      name = "ubuntu/images/*ubuntu-jammy-22.04-amd64-server-*"
@@ -25,6 +36,7 @@ source "amazon-ebs" "ubuntu"{
  ssh_username = "ubuntu"
 }
 build {
+ name = "Custom Ubuntu AMI using packer"
  sources = [
 		"source.amazon-ebs.ubuntu"
 	]
