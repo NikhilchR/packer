@@ -45,7 +45,7 @@ build {
 		"source.amazon-ebs.ubuntu"
 	]
   provisioner "ansible" {
-    playbook_file = "provisioner/setup.yaml"
+    playbook_file = "provisioner/setup.yml"
     user = "ec2_user"    
   }
 }
