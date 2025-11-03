@@ -53,6 +53,6 @@ build {
 
   provisioner "ansible" {
     playbook_file = "provisioner/setup.yml"
-    user          = "ec2_user"
+    user          = "ubuntu"
   }
 }
