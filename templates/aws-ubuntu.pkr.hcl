@@ -43,13 +43,6 @@ source "amazon-ebs" "ubuntu" {
     Environment = "Development"
     Owner       = "DevOps Team"
   }
-
-  ami_tags = {
-    Name        = "Custom Ubuntu AMI"
-    Environment = "Development"
-    Owner       = "DevOps Team"
-    Version     = "v1.0"
-  }
 }
 
 build {
