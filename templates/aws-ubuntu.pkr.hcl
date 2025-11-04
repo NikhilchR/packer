@@ -57,7 +57,7 @@ build {
   ]
 
   provisioner "ansible" {
-    playbook_file = "provisioner/${var.provisioner_playbook}"
+    playbook_file = "provisioner/setup.yml"
     user          = "ubuntu"
   }
 }
