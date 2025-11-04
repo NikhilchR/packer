@@ -21,6 +21,11 @@ variable "type_instance" {
   default = "t2.micro"
 }
 
+variable "provisioner_playbook" {
+  type = string
+  default = "provisioner.yml"
+}
+
 source "amazon-ebs" "ubuntu" {
   ami_name          = "my-packer-ami"
   ami_description   = "Custom ubuntu AMI"
@@ -52,7 +57,7 @@ build {
   ]
 
   provisioner "ansible" {
-    playbook_file = "provisioner/setup.yml"
+    playbook_file = "provisioner/${var.provisioner_playbook}"
     user          = "ubuntu"
   }
 }
