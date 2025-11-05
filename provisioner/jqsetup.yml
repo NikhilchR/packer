@@ -1,14 +1,28 @@
 ---
-- name: Install jq on Ubuntu systems
+- name: Install and verify jq on target machines
   hosts: all
   become: yes
-  gather_facts: yes
 
   tasks:
-    - name: Install jq if OS is Ubuntu
+    - name: Install jq on Debian/Ubuntu
       apt:
         name: jq
         state: present
         update_cache: yes
-      when: ansible_facts['os_family'] == "Debian" and
-            ansible_facts['distribution'] == "Ubuntu"
+      when: ansible_os_family == "Debian"
+
+    - name: Install jq on RHEL/CentOS
+      yum:
+        name: jq
+        state: present
+      when: ansible_os_family == "RedHat"
+
+    - name: Verify jq installation
+      command: jq --version
+      register: jq_version
+      changed_when: false
+      failed_when: jq_version.rc != 0
+
+    - name: Display jq version
+      debug:
+        msg: "jq is installed: {{ jq_version.stdout }}"
