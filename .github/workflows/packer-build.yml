@@ -1,8 +1,7 @@
 name: Build AMI and create EC2 instance with Golden AMI
 on:
- push:
-   branches:
-     - main
+ pull_request: 
+
 jobs:
   packer_install_and_build:
     runs-on: ubuntu-latest
